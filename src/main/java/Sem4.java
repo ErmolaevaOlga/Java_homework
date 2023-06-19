@@ -34,20 +34,58 @@ public class Sem4 {
 
             i++;
         }
-
-        int max = age.get(0);
-        for (int j = 0; j < age.size()-1; j++) {
-            int temp;
-            for (int k = 1; k < age.size()- 1 - j; k++) {
-                if (age.get(k)>max) {
-                    temp = index.get(k);
-
-                }
-
-            }
+        ArrayList<Integer> temporary = new ArrayList<>();
+        for (int j = 0; j < i; j++) {
+            temporary.add(age.get(j));
 
         }
+        // Сортировка индексов по возрасту
+        for (int j = 0; j < index.size()-1 ; j++) {
+            for (int k = 0; k < index.size() - 1 - j; k++) {
+                if (temporary.get(k) > temporary.get(k + 1)) {
+
+                    int temp = index.get(k);
+                    index.set(k, index.get(k + 1));
+                    index.set(k + 1, temp);
+                    temp = temporary.get(k);
+                    temporary.set(k, temporary.get(k + 1));
+                    temporary.set(k + 1, temp);
+
+                }
+            }
+        }
+        for (int j = 0; j < index.size() ; j++) {
+            System.out.printf("%s %s. %s. %s %s \n", familia.get(index.get(j)), name.get(index.get(j)).charAt(0),
+                    batka.get(index.get(j)).charAt(0), age.get(index.get(j)), gender.get(index.get(j)));
+        }
+
+        ArrayList<String> temporary2 = new ArrayList<>();
+        for (int j = 0; j < index.size(); j++) {
+            temporary2.add(gender.get(index.get(j)));
+        }
+        // Сортировка по полу
+        for (int j = 0; j < index.size()-1 ; j++) {
+
+                if (temporary2.get(j).contains("м")&&temporary2.get(j+1).contains("ж")){
+                    int temp = index.get(j);
+                    index.set(j, index.get(j + 1));
+                    index.set(j + 1, temp);
+                    String temp2 = temporary2.get(j);
+                    temporary2.set(j, temporary2.get(j + 1));
+                    temporary2.set(j + 1, temp2);
+                }
+                else continue;
+        }
+        System.out.println("\n");
+        for (int j = 0; j < index.size() ; j++) {
+            System.out.printf("%s %s. %s. %s %s \n", familia.get(index.get(j)), name.get(index.get(j)).charAt(0),
+                    batka.get(index.get(j)).charAt(0), age.get(index.get(j)), gender.get(index.get(j)));
+        }
+
         /*
+        index.forEach(n -> System.out.print(n));
+        age.forEach(n -> System.out.println(n));
+
 //        scanner.close();
         for (String [] person : data) {
             char name = person[1].charAt(0);
