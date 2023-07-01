@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class lab5 {
     public static void main(String[] args) {
@@ -19,9 +17,18 @@ public class lab5 {
             telBook.get(person[0]).add(person[1]);
 
         }
+        ArrayList<String> temp = new ArrayList<>();
+        for (String s: telBook.keySet()) {
+            temp.add(s);
+        }
+        Collections.sort(temp, new Comparator<String>(){
+            @Override
+            public int compare(String o1, String o2){
+                return telBook.get(o2).size() - telBook.get(o1).size();
+            }
+        });
 
-        System.out.println(telBook);
-
+        System.out.println(temp);
 
     }
 }
